@@ -43,6 +43,15 @@ class RemoteAddAccountTests: XCTestCase {
             httpClientSpy.completionWithData(makeInvalidData())
         })
     }
+    func test_add_should_not_complete_if_sut_has_been_deallocated() {
+        let httpClientSpy = HttpClientSpy()
+        var sut: RemoteAddAccount? =  RemoteAddAccount(url: makeUrl(), httpClient: httpClientSpy)
+        var result: Result<AccountModel,DomainError>?
+        sut?.add(addAccountModel: makeAddAccountModel()) { result = $0 }
+        sut = nil
+        httpClientSpy.completionWithError(.noConnectivity)
+        XCTAssertNil(result)
+    }
 }
 extension RemoteAddAccountTests {
     func makeSut(url: URL = URL(string:"http://any-url.com")!, file: StaticString = #file, line: UInt = #line) -> (sut: RemoteAddAccount, httpClientSpy: HttpClientSpy) {
@@ -52,11 +61,7 @@ extension RemoteAddAccountTests {
         checkMemoryLeak(for: httpClientSpy, file: file, line: line)
         return (sut, httpClientSpy)
     }
-    func checkMemoryLeak(for instance: AnyObject, file: StaticString = #file, line: UInt = #line) {
-        addTeardownBlock { [weak instance] in
-            XCTAssertNil(instance,  file: file, line: line)
-        }
-    }
+    
     func expect(_ sut: RemoteAddAccount, completionWith expectedResult: Result<AccountModel, DomainError>, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
         let exp = expectation(description: "waiting")
         sut.add(addAccountModel: makeAddAccountModel()) { receivedResult in
@@ -71,34 +76,9 @@ extension RemoteAddAccountTests {
        action()
         wait(for: [exp], timeout: 1)
     }
-    func makeInvalidData() -> Data {
-        return Data("ivalid_data".utf8)
-    }
-    func makeUrl() -> URL {
-        return URL(string:"http://any-url.com")!
-    }
+    
     func makeAddAccountModel() -> AddAccountModel {
         return AddAccountModel(name: "any_string", email: "any_email@gmail.com", password: "any_password", passawordConfirmation: "any_password")
     }
-    func makeAccountModel() -> AccountModel {
-        return AccountModel(id: "any_id", name: "any_string", email: "any_email@gmail.com", password: "any_password")
-    }
-    class HttpClientSpy: HttpPostClient {
-        var urls = [URL]()
-        var data: Data?
-        var completion: ((Result<Data,HttpError>) -> Void)?
-        
-        func post(to url: URL, with data: Data?, completion: @escaping (Result<Data,HttpError>) -> Void) {
-            self.urls.append(url)
-            self.data = data
-            self.completion = completion
-            
-        }
-        func completionWithError(_ error: HttpError) {
-            completion?(.failure(error))
-        }
-        func completionWithData(_ data: Data) {
-            completion?(.success(data))
-        }
-    }
+    
 }
