@@ -25,6 +25,7 @@
 		54C5BED725B86BC70047F15A /* TestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C5BE9425B867180047F15A /* TestFactory.swift */; };
 		54C5BF3825B9B7900047F15A /* AlamofireAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C5BF3725B9B7900047F15A /* AlamofireAdapter.swift */; };
 		54C5BF4425B9B8EC0047F15A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 54C5BF4325B9B8EC0047F15A /* Alamofire */; };
+		54C5BF5225B9BB9F0047F15A /* UrlProtocolStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C5BF4D25B9BAE00047F15A /* UrlProtocolStub.swift */; };
 		54EF55F025B601ED006FADAD /* AddAcount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EF55EF25B601ED006FADAD /* AddAcount.swift */; };
 		54EF55F325B61A41006FADAD /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EF55F225B61A41006FADAD /* AccountModel.swift */; };
 		54EF560325B61B11006FADAD /* Data.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54EF55FA25B61B11006FADAD /* Data.framework */; };
@@ -106,6 +107,7 @@
 		54C5BEB525B8698A0047F15A /* AlamofireAdapterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireAdapterTests.swift; sourceTree = "<group>"; };
 		54C5BEB725B8698A0047F15A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		54C5BF3725B9B7900047F15A /* AlamofireAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireAdapter.swift; sourceTree = "<group>"; };
+		54C5BF4D25B9BAE00047F15A /* UrlProtocolStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlProtocolStub.swift; sourceTree = "<group>"; };
 		54EF55E525B6001D006FADAD /* Domain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Domain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		54EF55E825B6001D006FADAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		54EF55EF25B601ED006FADAD /* AddAcount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAcount.swift; sourceTree = "<group>"; };
@@ -249,7 +251,7 @@
 		54C5BEB425B8698A0047F15A /* InfraTests */ = {
 			isa = PBXGroup;
 			children = (
-				54C5BEB525B8698A0047F15A /* AlamofireAdapterTests.swift */,
+				54C5BF4C25B9BAA70047F15A /* Http */,
 				54C5BEB725B8698A0047F15A /* Info.plist */,
 			);
 			path = InfraTests;
@@ -259,6 +261,15 @@
 			isa = PBXGroup;
 			children = (
 				54C5BF3725B9B7900047F15A /* AlamofireAdapter.swift */,
+			);
+			path = Http;
+			sourceTree = "<group>";
+		};
+		54C5BF4C25B9BAA70047F15A /* Http */ = {
+			isa = PBXGroup;
+			children = (
+				54C5BF4D25B9BAE00047F15A /* UrlProtocolStub.swift */,
+				54C5BEB525B8698A0047F15A /* AlamofireAdapterTests.swift */,
 			);
 			path = Http;
 			sourceTree = "<group>";
@@ -562,6 +573,7 @@
 				54C5BED725B86BC70047F15A /* TestFactory.swift in Sources */,
 				54C5BEB625B8698A0047F15A /* AlamofireAdapterTests.swift in Sources */,
 				54C5BED025B86BB50047F15A /* TestsExtensions.swift in Sources */,
+				54C5BF5225B9BB9F0047F15A /* UrlProtocolStub.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
